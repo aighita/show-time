@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Band Details{% endblock %}
+
+{% block body %}
+    <div class="flex min-h-screen bg-background text-foreground">
+        <!-- Sidebar via React -->
+        <div {{ react_component('AppSidebar') }}></div>
+
+        <!-- Main Content -->
+        <main class="flex-1 p-8 space-y-8">
+            <!-- Header -->
+            <div class="flex justify-between items-center">
+                <h1 class="text-3xl font-bold tracking-tight">Band Details</h1>
+                <a href="{{ path('app_band_index') }}" class="btn btn-ghost btn-sm">
+                    ← Back to list
+                </a>
+            </div>
+
+            <!-- Details Card -->
+            <div class="w-full bg-card text-card-foreground rounded-2xl p-10 space-y-6">
+                <!-- Band Info Table -->
+                <table class="table w-full text-sm border border-border rounded-lg overflow-hidden">
+                    <tbody>
+                    <tr class="border-b">
+                        <th class="text-left px-4 py-3 text-muted-foreground w-1/3">ID</th>
+                        <td class="px-4 py-3">{{ band.id }}</td>
+                    </tr>
+                    <tr class="border-b">
+                        <th class="text-left px-4 py-3 text-muted-foreground">Name</th>
+                        <td class="px-4 py-3">{{ band.name }}</td>
+                    </tr>
+                    <tr class="border-b">
+                        <th class="text-left px-4 py-3 text-muted-foreground">Genre</th>
+                        <td class="px-4 py-3">{{ band.genre.value }}</td>
+                    </tr>
+                    <tr>
+                        <th class="text-left px-4 py-3 text-muted-foreground">Created</th>
+                        <td class="px-4 py-3">{{ band.createdAt|date('Y-m-d H:i') }}</td>
+                    </tr>
+                    </tbody>
+                </table>
+
+                <!-- Actions Row -->
+                <div class="flex flex-col md:flex-row gap-4 pt-6">
+                    <a href="{{ path('app_band_edit', { id: band.id }) }}"
+                       class="btn btn-warning w-full md:w-1/2 text-white">
+                        Edit
+                    </a>
+
+                    <div class="w-full md:w-1/2">
+                        {{ include('band/_delete_form.html.twig') }}
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+{% endblock %}

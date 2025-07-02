@@ -1,10 +1,16 @@
+import {registerReactControllerComponents} from '@symfony/ux-react';
 import './bootstrap.js';
-/*
- * Welcome to your app's main JavaScript file!
- *
- * This file will be included onto the page via the importmap() Twig function,
- * which should already be in your base.html.twig.
- */
 import './styles/app.css';
 
-console.log('This log comes from assets/app.js - welcome to AssetMapper! 🎉');
+// Register all React components from ./react and subdirectories
+registerReactControllerComponents(
+    require.context('./react/components', true, /\.(j|t)sx?$/)
+);
+
+// Optional loader cleanup
+document.addEventListener('DOMContentLoaded', () => {
+    const loader = document.querySelector('.loader-wrapper');
+    if (loader) {
+        setTimeout(() => loader.remove(), 500);
+    }
+});

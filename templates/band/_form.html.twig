@@ -1,0 +1,68 @@
+{{ form_start(form, { attr: { class: 'space-y-6' } }) }}
+
+    {# Name Field #}
+<div>
+    {{ form_label(form.name, null, {
+        label_attr: { class: 'block text-sm font-medium text-foreground mb-1' }
+    }) }}
+    {{ form_widget(form.name, {
+        attr: {
+            class: 'input input-bordered w-full bg-background text-foreground placeholder:text-muted-foreground'
+        }
+    }) }}
+    {% if form_errors(form.name) %}
+        <p class="mt-1 text-sm text-destructive">{{ form_errors(form.name) }}</p>
+    {% endif %}
+</div>
+
+{# Genre Field #}
+<div>
+    {{ form_label(form.genre, null, {
+        label_attr: { class: 'block text-sm font-medium text-foreground mb-1' }
+    }) }}
+    {{ form_widget(form.genre, {
+        attr: {
+            class: 'select select-bordered w-full bg-background text-foreground'
+        }
+    }) }}
+    {% if form_errors(form.genre) %}
+        <p class="mt-1 text-sm text-destructive">{{ form_errors(form.genre) }}</p>
+    {% endif %}
+</div>
+
+{# Description Field (Optional) #}
+    {% if form.description is defined %}
+        <div>
+            {{ form_label(form.description, null, {
+                label_attr: { class: 'block text-sm font-medium text-foreground mb-1' }
+            }) }}
+            {{ form_widget(form.description, {
+                attr: {
+                    class: 'textarea textarea-bordered w-full resize-none bg-background text-foreground placeholder:text-muted-foreground'
+                }
+            }) }}
+            {% if form_errors(form.description) %}
+                <p class="mt-1 text-sm text-destructive">{{ form_errors(form.description) }}</p>
+            {% endif %}
+        </div>
+    {% endif %}
+
+    {# Submit + Optional Delete Button #}
+<div class="flex flex-col md:flex-row gap-4 pt-6">
+    <button
+        type="submit"
+        class="btn text-white transition {{ (showDelete is defined and showDelete) ? 'w-full md:w-1/2' : 'w-full' }} btn-success">
+        {{ button_label|default('Save') }}
+    </button>
+
+    {% if showDelete is defined and showDelete %}
+        <div class="w-full md:w-1/2"
+            {{ react_component('DeleteBandDialog', {
+                bandId: band.id,
+                csrfToken: csrf_token('delete' ~ band.id),
+            }) }}
+        ></div>
+    {% endif %}
+</div>
+
+{{ form_end(form) }}

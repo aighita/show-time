@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Dashboard | Show Time{% endblock %}
+
+{% block body %}
+    <div class="flex min-h-screen bg-background text-foreground">
+        <!-- Sidebar -->
+        <div {{ react_component('AppSidebar') }}></div>
+
+        <!-- Main content -->
+        <main class="flex-1 p-6 space-y-10">
+            <h1 class="text-3xl font-bold tracking-tight">Dashboard </h1>
+
+            <div {{ react_component('DashboardSummary', summary) }} ></div>
+
+            <div {{ react_component('DashboardSections', {
+                festivals: festivals,
+                bands: bands,
+                bookings: bookings
+            }) }}></div>
+        </main>
+    </div>
+{% endblock %}
