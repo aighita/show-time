@@ -1,0 +1,85 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Festival{% endblock %}
+
+{% block body %}
+    <div class="flex min-h-screen bg-background text-foreground">
+        <!-- Sidebar via React -->
+        <div {{ react_component('AppSidebar') }}></div>
+
+        <!-- Main Content -->
+        <main class="flex-1 p-8 space-y-8">
+            <!-- Header -->
+            <div class="flex justify-between items-center">
+                <h1 class="text-3xl font-bold tracking-tight">Edit Festival</h1>
+                <a href="{{ path('app_festival_index') }}" class="btn btn-ghost btn-sm">
+                    ← Back to list
+                </a>
+            </div>
+
+            <!-- Form Card -->
+            <div class=" w-full bg-card text-card-foreground rounded-2xl p-10 space-y-6">
+                {{ include('festival/_form.html.twig', {
+                    button_label: 'Update',
+                    showDelete: true,
+                }) }}
+
+                {#                <div class="pt-4"> #}
+                {#                {{ include('band/_delete_form.html.twig') }} #}
+                {#                </div> #}
+
+                {#                <div {{ react_component('DeleteBandDialog', { #}
+                {#                    bandId: band.id, #}
+                {#                    csrfToken: csrf_token('delete' ~ band.id), #}
+                {#                }) }}></div> #}
+                <div class="overflow-x-auto rounded-xl shadow-md bg-card text-card-foreground">
+                    <table class="table w-full text-sm">
+                        <thead class="bg-muted">
+                        <tr class="text-left text-xs uppercase tracking-wider text-muted-foreground">
+                            <th class="py-3 px-4">ID</th>
+                            <th class="py-3 px-4">Name</th>
+                            <th class="py-3 px-4">Genre</th>
+                            <th class="py-3 px-4">Description</th>
+                            <th class="py-3 px-4">Date created</th>
+                            <th class="py-3 px-4">Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for band in bands %}
+                            <tr class="hover:bg-muted/50 transition-colors">
+                                <td class="py-3 px-4">{{ band.id }}</td>
+                                <td class="py-3 px-4">{{ band.name }}</td>
+                                <td class="py-3 px-4">{{ band.genre.value }}</td>
+                                <td class="py-3 px-4">{{ band.description }}</td>
+                                <td class="py-3 px-4">{{ band.createdAt|date('Y-m-d H:i') }}</td>
+                                <td class="py-3 px-4 space-x-2">
+                                    <a class="btn btn-ghost" data-turbo="false"
+                                       href="{{ path('app_band_show', {'id': band.id}) }}">Show</a>
+
+                                    {% if band in festival.bands %}
+                                        <a class="btn btn-success" data-turbo="false"
+                                           href="{{ path('app_festival_band_delete', {'festivalId': festival.id, 'bandId': band.id}) }}">
+
+                                        </a>
+                                    {% else %}
+                                        <a class="btn btn-error" data-turbo="false"
+                                           href="{{ path('app_festival_band_add', {'festivalId': festival.id, 'bandId': band.id}) }}">
+
+                                        </a>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td colspan="5" class="text-center py-6 text-muted-foreground">
+                                    No bands found.
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+{% endblock %}

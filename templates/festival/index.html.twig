@@ -14,7 +14,7 @@
             <div class="flex justify-between items-center">
                 <h1 class="text-3xl font-bold tracking-tight">Festivals</h1>
                 {#                <a class="btn btn-primary btn-sm" href="{{ path('app_festival_new') }}"> #}
-                <a class="btn btn-primary btn-sm" href="#">
+                <a class="btn btn-primary btn-sm" href="{{ path('app_festival_new') }}">
                     + Add Festival
                 </a>
             </div>
@@ -51,12 +51,13 @@
                             <td class="py-3 px-4 space-x-2">
                                 <a class="btn btn-ghost btn-sm"
                                     {#                                   href="{{ path('app_festival_show', {'id': festival.id}) }}">Show</a> #}
-                                   href="#">
+                                   href="{{ path('app_festival_show', { 'id': festival.id }) }}"
+                                >
                                     Show
                                 </a>
                                 <a class="btn btn-soft btn-sm"
-                                    {#                                   href="{{ path('app_festival_edit', {'id': festival.id}) }}">Edit</a> #}
-                                   href="#">
+                                   href="{{ path('app_festival_edit', { 'id': festival.id }) }}"
+                                >
                                     Edit
                                 </a>
                             </td>

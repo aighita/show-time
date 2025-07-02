@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Festival{% endblock %}
+
+{% block body %}
+    <div class="flex min-h-screen bg-background text-foreground">
+        <!-- React Sidebar -->
+        <div {{ react_component('AppSidebar') }}></div>
+
+        <!-- Main Content Area -->
+        <main class="flex-1 p-8 space-y-8">
+            <!-- Header -->
+            <div class="flex justify-between items-center">
+                <h1 class="text-3xl font-bold tracking-tight">Create New Festival</h1>
+                <a href="{{ path('app_festival_index') }}" class="btn btn-ghost btn-sm">
+                    ← Back to list
+                </a>
+            </div>
+
+            <!-- Full Width Form Section -->
+            <div class="w-full bg-card text-card-foreground rounded-2xl p-10">
+                {{ include('festival/_form.html.twig', {
+                    button_label: 'Save',
+                    showDelete: false
+                }) }}
+            </div>
+        </main>
+    </div>
+{% endblock %}

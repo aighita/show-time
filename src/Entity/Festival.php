@@ -26,6 +26,7 @@ class Festival
      * @var Collection<int, Band>
      */
     #[ORM\ManyToMany(targetEntity: Band::class, inversedBy: 'festivals')]
+    #[ORM\JoinTable(name: 'festival_band')]
     private Collection $bands;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
@@ -87,6 +88,7 @@ class Festival
     {
         if (!$this->bands->contains($band)) {
             $this->bands->add($band);
+            $band->addFestival($this); // <== Important!
         }
 
         return $this;
@@ -94,7 +96,9 @@ class Festival
 
     public function removeBand(Band $band): static
     {
-        $this->bands->removeElement($band);
+        if ($this->bands->removeElement($band)) {
+            $band->removeFestival($this); // <== Important!
+        }
 
         return $this;
     }

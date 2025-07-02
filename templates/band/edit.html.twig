@@ -12,14 +12,14 @@
             <!-- Header -->
             <div class="flex justify-between items-center">
                 <h1 class="text-3xl font-bold tracking-tight">Edit Band</h1>
-                <a href="{{ path('app_band_index') }}" class="btn btn-ghost btn-sm">
+                <a href="{{ path('app_festival_index') }}" class="btn btn-ghost btn-sm">
                     ← Back to list
                 </a>
             </div>
 
             <!-- Form Card -->
             <div class=" w-full bg-card text-card-foreground rounded-2xl p-10 space-y-6">
-                {{ include('band/_form.html.twig', {
+                {{ include('festival/_form.html.twig', {
                     button_label: 'Update',
                     showDelete: true
                 }) }}

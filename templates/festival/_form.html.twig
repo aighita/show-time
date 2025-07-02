@@ -1,0 +1,102 @@
+{{ form_start(form, { attr: { class: 'space-y-6' } }) }}
+
+    {# Name Field #}
+<div>
+    {{ form_label(form.name, null, {
+        label_attr: { class: 'block text-sm font-medium text-foreground mb-1' }
+    }) }}
+    {{ form_widget(form.name, {
+        attr: {
+            class: 'input input-bordered w-full bg-background text-foreground placeholder:text-muted-foreground'
+        }
+    }) }}
+    {% if form_errors(form.name) %}
+        <p class="mt-1 text-sm text-destructive">{{ form_errors(form.name) }}</p>
+    {% endif %}
+</div>
+
+{# Location Field #}
+<div>
+    {{ form_label(form.location, null, {
+        label_attr: { class: 'block text-sm font-medium text-foreground mb-1' }
+    }) }}
+    {{ form_widget(form.location, {
+        attr: {
+            class: 'select select-bordered w-full bg-background text-foreground'
+        }
+    }) }}
+    {% if form_errors(form.location) %}
+        <p class="mt-1 text-sm text-destructive">{{ form_errors(form.location) }}</p>
+    {% endif %}
+</div>
+
+{# Start Date #}
+<div>
+    {{ form_label(form.startDate, null, {
+        label_attr: { class: 'block text-sm font-medium text-foreground mb-1' }
+    }) }}
+    {{ form_widget(form.startDate, {
+        attr: {
+            class: 'textarea textarea-bordered w-full resize-none bg-background text-foreground placeholder:text-muted-foreground'
+        }
+    }) }}
+    {% if form_errors(form.startDate) %}
+        <p class="mt-1 text-sm text-destructive">{{ form_errors(form.startDate) }}</p>
+    {% endif %}
+</div>
+
+{# End Date #}
+<div>
+    {{ form_label(form.endDate, null, {
+        label_attr: { class: 'block text-sm font-medium text-foreground mb-1' }
+    }) }}
+    {{ form_widget(form.endDate, {
+        attr: {
+            class: 'textarea textarea-bordered w-full resize-none bg-background text-foreground placeholder:text-muted-foreground'
+        }
+    }) }}
+    {% if form_errors(form.endDate) %}
+        <p class="mt-1 text-sm text-destructive">{{ form_errors(form.endDate) }}</p>
+    {% endif %}
+</div>
+
+{# Submit + Optional Delete Button #}
+<div class="flex flex-col md:flex-row gap-4 pt-6">
+    <button
+        type="submit"
+        class="btn text-white transition {{ (showDelete is defined and showDelete) ? 'w-full md:w-1/2' : 'w-full' }} btn-success">
+        {{ button_label | default('Save') }}
+    </button>
+
+    {% if showDelete is defined and showDelete %}
+        <div class="w-full md:w-1/2"
+            {{ react_component('DeleteFestivalDialog', {
+                festivalId: festival.id,
+                csrfToken: csrf_token('delete' ~ festival.id),
+            }) }}
+        ></div>
+    {% endif %}
+</div>
+
+{# <div class="flex flex-col md:flex-row gap-4 pt-6"> #}
+{#    {{ form_label(form.bands, null, { #}
+{#        label_attr: { class: 'block text-sm font-medium text-foreground mb-1' } #}
+{#    }) }} #}
+{#    {{ form_widget(form.bands, { #}
+{#        attr: { #}
+{#            class: 'textarea textarea-bordered w-full resize-none bg-background text-foreground placeholder:text-muted-foreground' #}
+{#        } #}
+{#    }) }} #}
+{#    {% if form_errors(form.bands) %} #}
+{#        <p class="mt-1 text-sm text-destructive">{{ form_errors(form.bands) }}</p> #}
+{#    {% endif %} #}
+{# </div> #}
+
+{# <div class="flex flex-col md:flex-row gap-4 pt-6"> #}
+{#    {{ form_label(form.bands, null, { #}
+{#        label_attr: { class: 'block text-sm font-medium text-foreground mb-1' } #}
+{#    }) }} #}
+
+{# </div> #}
+
+{{ form_end(form) }}

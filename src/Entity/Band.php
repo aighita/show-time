@@ -99,7 +99,6 @@ class Band
     {
         if (!$this->festivals->contains($festival)) {
             $this->festivals->add($festival);
-            $festival->addBand($this);
         }
 
         return $this;
@@ -107,9 +106,7 @@ class Band
 
     public function removeFestival(Festival $festival): static
     {
-        if ($this->festivals->removeElement($festival)) {
-            $festival->removeBand($this);
-        }
+        $this->festivals->removeElement($festival);
 
         return $this;
     }
