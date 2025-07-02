@@ -12,14 +12,14 @@ import {
     SidebarTrigger,
 } from "@/components/ui/sidebar";
 
-import {Calendar, Music, User} from "lucide-react";
+import {ClipboardList, Music, PartyPopper, User} from "lucide-react";
 import {Avatar, AvatarFallback, AvatarImage} from "@/components/ui/avatar";
-// import {Avatar, AvatarFallback, AvatarImage} from "@/components/ui/avatar";
 
 export default function AppSidebar() {
     const items = [
         {title: "Bands", url: "/band", icon: Music},
-        {title: "Festivals", url: "/festival", icon: Calendar},
+        {title: "Festivals", url: "/festival", icon: PartyPopper},
+        {title: "Bookings", url: "/booking", icon: ClipboardList}
     ];
 
     return (

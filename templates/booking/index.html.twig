@@ -1,0 +1,76 @@
+{# templates/booking/index.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block title %}booking Admin{% endblock %}
+
+{% block body %}
+    <div class="flex min-h-screen bg-background text-foreground">
+        <!-- React Sidebar Component -->
+        <div {{ react_component('AppSidebar') }}></div>
+
+        <!-- Main Content Area -->
+        <main class="flex-1 space-y-6">
+            <!-- Header -->
+            <div class="sticky top-0 z-10 bg-card px-4 py-4 flex justify-between items-center shadow-lg">
+                <h1 class="text-3xl font-bold tracking-tight">Bookings</h1>
+                {#                <a class="btn btn-primary btn-sm" href="{{ path('app_booking_new') }}"> #}
+                {#                    + Add booking #}
+                {#                </a> #}
+            </div>
+
+            <!-- Table of bookings -->
+            <div class="overflow-x-auto rounded-xl px-4 bg-card text-card-foreground">
+                <table class="table w-full text-sm">
+                    <thead class="bg-muted">
+                    <tr class="text-left text-xs uppercase tracking-wider text-muted-foreground">
+                        <th class="py-3 px-4">ID</th>
+                        <th class="py-3 px-4">Full Name</th>
+                        <th class="py-3 px-4">Email</th>
+                        <th class="py-3 px-4">Festival</th>
+                        {#                        <th class="py-3 px-4">End Date</th> #}
+                        {#                        <th class="py-3 px-4">Bands</th> #}
+                        <th class="py-3 px-4">Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for booking in bookings %}
+                        <tr class="hover:bg-muted/50 transition-colors">
+                            <td class="py-3 px-4">{{ booking.id }}</td>
+                            <td class="py-3 px-4">{{ booking.fullName }}</td>
+                            <td class="py-3 px-4">{{ booking.email }}</td>
+                            <td class="py-3 px-4">{{ booking.festival.name }}</td>
+                            {#                            <td class="py-3 px-4">{{ booking.endDate|date('Y-m-d') }}</td> #}
+                            {#                            <td class="py-3 px-4"> #}
+                            {#                                {% if booking.bands|length > 0 %} #}
+                            {#                                    {{ booking.bands|length }} band{{ booking.bands|length > 1 ? 's' }} #}
+                            {#                                {% else %} #}
+                            {#                                    <span class="text-muted-foreground">None</span> #}
+                            {#                                {% endif %} #}
+                            {#                            </td> #}
+                            <td class="py-3 px-4 space-x-2">
+                                <a class="btn btn-ghost btn-sm"
+                                    {#                                   href="{{ path('app_booking_show', {'id': booking.id}) }}">Show</a> #}
+                                    {#                                   href="{{ path('app_booking_show', { 'id': booking.id }) }}" #}
+                                >
+                                    Show
+                                </a>
+                                <a class="btn btn-soft btn-sm"
+                                    {#                                   href="{{ path('app_booking_edit', { 'id': booking.id }) }}" #}
+                                >
+                                    Delete
+                                </a>
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="7" class="text-center py-6 text-muted-foreground">
+                                No bookings found.
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+{% endblock %}
