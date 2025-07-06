@@ -1,0 +1,8 @@
+ALTER TABLE booking
+    ADD COLUMN paid BOOLEAN;
+
+UPDATE booking
+SET paid = IF(RAND() < 0.5, TRUE, FALSE);
+
+ALTER TABLE booking
+    MODIFY COLUMN paid BOOLEAN NOT NULL;

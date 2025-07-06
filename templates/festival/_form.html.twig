@@ -1,63 +1,79 @@
 {{ form_start(form, { attr: { class: 'space-y-6' } }) }}
 
-    {# Name Field #}
-<div>
-    {{ form_label(form.name, null, {
-        label_attr: { class: 'block text-sm font-medium text-foreground mb-1' }
-    }) }}
-    {{ form_widget(form.name, {
-        attr: {
-            class: 'input input-bordered w-full bg-background text-foreground placeholder:text-muted-foreground'
-        }
-    }) }}
-    {% if form_errors(form.name) %}
-        <p class="mt-1 text-sm text-destructive">{{ form_errors(form.name) }}</p>
-    {% endif %}
+{# Name and Location in same row #}
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <div class="border border-border rounded-xl p-4">
+        {{ form_label(form.name, null, {
+            label_attr: { class: 'block text-sm font-medium text-foreground mb-1' }
+        }) }}
+        {{ form_widget(form.name, {
+            attr: {
+                class: 'input input-bordered w-full bg-background text-foreground placeholder:text-muted-foreground'
+            }
+        }) }}
+        {% if form_errors(form.name) %}
+            <p class="mt-1 text-sm text-destructive">{{ form_errors(form.name) }}</p>
+        {% endif %}
+    </div>
+
+    <div class="border border-border rounded-xl p-4">
+        {{ form_label(form.location, null, {
+            label_attr: { class: 'block text-sm font-medium text-foreground mb-1' }
+        }) }}
+        {{ form_widget(form.location, {
+            attr: {
+                class: 'input input-bordered w-full bg-background text-foreground placeholder:text-muted-foreground'
+            }
+        }) }}
+        {% if form_errors(form.location) %}
+            <p class="mt-1 text-sm text-destructive">{{ form_errors(form.location) }}</p>
+        {% endif %}
+    </div>
 </div>
 
-{# Location Field #}
-<div>
-    {{ form_label(form.location, null, {
-        label_attr: { class: 'block text-sm font-medium text-foreground mb-1' }
-    }) }}
-    {{ form_widget(form.location, {
-        attr: {
-            class: 'select select-bordered w-full bg-background text-foreground'
-        }
-    }) }}
-    {% if form_errors(form.location) %}
-        <p class="mt-1 text-sm text-destructive">{{ form_errors(form.location) }}</p>
-    {% endif %}
-</div>
+{# Start Date, End Date, Booking Price in same row #}
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+    <div class="border border-border rounded-xl p-4">
+        {{ form_label(form.startDate, null, {
+            label_attr: { class: 'block text-sm font-medium text-foreground mb-1' }
+        }) }}
+        {{ form_widget(form.startDate, {
+            attr: {
+                class: 'input input-bordered w-full bg-background text-foreground placeholder:text-muted-foreground'
+            }
+        }) }}
+        {% if form_errors(form.startDate) %}
+            <p class="mt-1 text-sm text-destructive">{{ form_errors(form.startDate) }}</p>
+        {% endif %}
+    </div>
 
-{# Start Date #}
-<div>
-    {{ form_label(form.startDate, null, {
-        label_attr: { class: 'block text-sm font-medium text-foreground mb-1' }
-    }) }}
-    {{ form_widget(form.startDate, {
-        attr: {
-            class: 'textarea textarea-bordered w-full resize-none bg-background text-foreground placeholder:text-muted-foreground'
-        }
-    }) }}
-    {% if form_errors(form.startDate) %}
-        <p class="mt-1 text-sm text-destructive">{{ form_errors(form.startDate) }}</p>
-    {% endif %}
-</div>
+    <div class="border border-border rounded-xl p-4">
+        {{ form_label(form.endDate, null, {
+            label_attr: { class: 'block text-sm font-medium text-foreground mb-1' }
+        }) }}
+        {{ form_widget(form.endDate, {
+            attr: {
+                class: 'input input-bordered w-full bg-background text-foreground placeholder:text-muted-foreground'
+            }
+        }) }}
+        {% if form_errors(form.endDate) %}
+            <p class="mt-1 text-sm text-destructive">{{ form_errors(form.endDate) }}</p>
+        {% endif %}
+    </div>
 
-{# End Date #}
-<div>
-    {{ form_label(form.endDate, null, {
-        label_attr: { class: 'block text-sm font-medium text-foreground mb-1' }
-    }) }}
-    {{ form_widget(form.endDate, {
-        attr: {
-            class: 'textarea textarea-bordered w-full resize-none bg-background text-foreground placeholder:text-muted-foreground'
-        }
-    }) }}
-    {% if form_errors(form.endDate) %}
-        <p class="mt-1 text-sm text-destructive">{{ form_errors(form.endDate) }}</p>
-    {% endif %}
+    <div class="border border-border rounded-xl p-4">
+        {{ form_label(form.bookingPrice, null, {
+            label_attr: { class: 'block text-sm font-medium text-foreground mb-1' }
+        }) }}
+        {{ form_widget(form.bookingPrice, {
+            attr: {
+                class: 'input input-bordered w-full bg-background text-foreground placeholder:text-muted-foreground'
+            }
+        }) }}
+        {% if form_errors(form.bookingPrice) %}
+            <p class="mt-1 text-sm text-destructive">{{ form_errors(form.bookingPrice) }}</p>
+        {% endif %}
+    </div>
 </div>
 
 {# Submit + Optional Delete Button #}
@@ -77,26 +93,5 @@
         ></div>
     {% endif %}
 </div>
-
-{# <div class="flex flex-col md:flex-row gap-4 pt-6"> #}
-{#    {{ form_label(form.bands, null, { #}
-{#        label_attr: { class: 'block text-sm font-medium text-foreground mb-1' } #}
-{#    }) }} #}
-{#    {{ form_widget(form.bands, { #}
-{#        attr: { #}
-{#            class: 'textarea textarea-bordered w-full resize-none bg-background text-foreground placeholder:text-muted-foreground' #}
-{#        } #}
-{#    }) }} #}
-{#    {% if form_errors(form.bands) %} #}
-{#        <p class="mt-1 text-sm text-destructive">{{ form_errors(form.bands) }}</p> #}
-{#    {% endif %} #}
-{# </div> #}
-
-{# <div class="flex flex-col md:flex-row gap-4 pt-6"> #}
-{#    {{ form_label(form.bands, null, { #}
-{#        label_attr: { class: 'block text-sm font-medium text-foreground mb-1' } #}
-{#    }) }} #}
-
-{# </div> #}
 
 {{ form_end(form) }}

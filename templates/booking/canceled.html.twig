@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Payment Cancelled{% endblock %}
+
+{% block body %}
+    <div class="min-h-screen flex flex-col items-center justify-center bg-background text-foreground p-8 space-y-6">
+        <h1 class="text-3xl font-bold text-red-600">❌ Payment Cancelled</h1>
+
+        <div class="bg-card rounded-xl shadow-lg p-6 max-w-lg w-full">
+            <p class="text-lg">Hello, <strong>{{ booking.fullName }}</strong>.</p>
+            <p>Your payment for <strong>{{ festival.name }}</strong> was cancelled.</p>
+
+            <ul class="mt-4 text-sm text-muted-foreground space-y-1">
+                <li><strong>Festival:</strong> {{ festival.name }}</li>
+                <li><strong>Location:</strong> {{ festival.location }}</li>
+                <li><strong>Dates:</strong> {{ festival.startDate|date('Y-m-d') }}
+                    → {{ festival.endDate|date('Y-m-d') }}</li>
+                <li><strong>Email:</strong> {{ booking.email }}</li>
+            </ul>
+
+            <div class="mt-6 flex flex-col gap-3">
+                <a href="{{ path('app_booking_pay', {id: booking.id}) }}" class="btn btn-warning w-full">
+                    Retry Payment
+                </a>
+                <a href="{{ path('app_festival_index') }}" class="btn btn-secondary w-full">
+                    Back to Festivals
+                </a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

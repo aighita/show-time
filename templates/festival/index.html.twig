@@ -13,7 +13,7 @@
             <!-- Header -->
             <div class="sticky top-0 z-10 bg-card px-4 py-4 flex justify-between items-center shadow-lg">
                 <h1 class="text-3xl font-bold tracking-tight">Festivals</h1>
-                <a class="btn btn-primary btn-sm" href="{{ path('app_festival_new') }}">
+                <a class="btn btn-ghost btn-sm" href="{{ path('app_festival_new') }}">
                     + Add Festival
                 </a>
             </div>
@@ -29,6 +29,7 @@
                         <th class="py-3 px-4">Start Date</th>
                         <th class="py-3 px-4">End Date</th>
                         <th class="py-3 px-4">Bands</th>
+                        <th class="py-3 px-4">Price</th>
                         <th class="py-3 px-4">Actions</th>
                     </tr>
                     </thead>
@@ -40,6 +41,7 @@
                             <td class="py-3 px-4">{{ festival.location }}</td>
                             <td class="py-3 px-4">{{ festival.startDate|date('Y-m-d') }}</td>
                             <td class="py-3 px-4">{{ festival.endDate|date('Y-m-d') }}</td>
+
                             <td class="py-3 px-4">
                                 {% if festival.bands|length > 0 %}
                                     {{ festival.bands|length }} band{{ festival.bands|length > 1 ? 's' }}
@@ -47,6 +49,7 @@
                                     <span class="text-muted-foreground">None</span>
                                 {% endif %}
                             </td>
+                            <td class="py-3 px-4">{{ festival.bookingPrice }}</td>
                             <td class="py-3 px-4 space-x-2">
                                 <a class="btn btn-ghost btn-sm"
                                     {#                                   href="{{ path('app_festival_show', {'id': festival.id}) }}">Show</a> #}

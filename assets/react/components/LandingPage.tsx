@@ -1,8 +1,10 @@
-// LandingPage.tsx
 import {Navbar} from "@/react/components/common/Navbar"
 import {Hero} from "@/react/components/sections/Hero"
-import {HowItWorks} from "@/react/components/sections/HowItWorks"
-import {Footer} from "@/react/components/common/Footer"
+import {HowItWorks} from "@/react/components/sections/HowItWorks";
+
+// interface LandingPageProps {
+//     festivals: Festival[];
+// }
 
 export default function LandingPage() {
     return (
@@ -10,10 +12,8 @@ export default function LandingPage() {
             <Navbar/>
             <Hero/>
             <HowItWorks/>
-            {/*<FeaturedFestivals/>*/}
-            {/*<Timeline/>*/}
-            {/*<Testimonials/>*/}
-            <Footer/>
+            {/*<FeaturedFestivals festivals={festivals}/>*/}
+            {/*<Footer/>*/}
         </>
-    )
+    );
 }

@@ -9,9 +9,8 @@
         <div {{ react_component('AppSidebar') }}></div>
 
         <!-- Main Content Area -->
-        <main class="flex-1 p-8 space-y-8">
-            <!-- Header -->
-            <div class="flex justify-between items-center">
+        <main class="flex-1 space-y-6">
+            <div class="sticky top-0 z-10 bg-card px-4 py-4 flex justify-between items-center shadow-lg">
                 <h1 class="text-3xl font-bold tracking-tight">Create New Band</h1>
                 <a href="{{ path('app_band_index') }}" class="btn btn-ghost btn-sm">
                     ← Back to list

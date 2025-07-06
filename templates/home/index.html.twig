@@ -6,4 +6,64 @@
 
     <div {{ react_component('LandingPage') }}></div>
 
+    <div {{ react_component('FeaturedFestivals', {
+        festivals: festivals
+    }) }}></div>
+
+    {#    <!-- Table of Festivals --> #}
+    {#    <div class="overflow-x-auto rounded-xl px-4 bg-card text-card-foreground"> #}
+    {#        <table class="table w-full text-sm"> #}
+    {#            <thead class="bg-muted"> #}
+    {#            <tr class="text-left text-xs uppercase tracking-wider text-muted-foreground"> #}
+    {#                #}{#                <th class="py-3 px-4">ID</th> #}
+    {#                <th class="py-3 px-4">Name</th> #}
+    {#                <th class="py-3 px-4">Location</th> #}
+    {#                <th class="py-3 px-4">Date</th> #}
+    {#                #}{#                <th class="py-3 px-4">Date</th> #}
+    {#                <th class="py-3 px-4">Bands</th> #}
+    {#                <th class="py-3 px-4">Actions</th> #}
+    {#            </tr> #}
+    {#            </thead> #}
+    {#            <tbody> #}
+    {#            {% for festival in festivals %} #}
+    {#                <tr class="hover:bg-muted/50 transition-colors"> #}
+    {#                    #}{#                    <td class="py-3 px-4">{{ festival.id }}</td> #}
+    {#                    <td class="py-3 px-4">{{ festival.name }}</td> #}
+    {#                    <td class="py-3 px-4">{{ festival.location }}</td> #}
+    {#                    <td class="py-3 px-4">{{ festival.startDate|date('m-d') }} #}
+    {#                        - {{ festival.endDate|date('m-d-Y') }}</td> #}
+    {#                    #}{#                    <td class="py-3 px-4">{{ festival.endDate|date('Y-m-d') }}</td> #}
+    {#                    <td class="py-3 px-4"> #}
+    {#                        {% if festival.bands|length > 0 %} #}
+    {#                            {{ festival.bands|length }} band{{ festival.bands|length > 1 ? 's' }} #}
+    {#                        {% else %} #}
+    {#                            <span class="text-muted-foreground">None</span> #}
+    {#                        {% endif %} #}
+    {#                    </td> #}
+    {#                    <td class="py-3 px-4 space-x-2"> #}
+    {#                        <a class="btn btn-ghost btn-sm" #}
+    {#                           href="{{ path('app_festival_show', { 'id': festival.id }) }}" #}
+    {#                        > #}
+    {#                            Show #}
+    {#                        </a> #}
+    {#                        <a class="btn btn-soft btn-sm" #}
+    {#                           href="{{ path('app_festival_edit', { 'id': festival.id }) }}" #}
+    {#                        > #}
+    {#                            Book #}
+    {#                        </a> #}
+    {#                    </td> #}
+    {#                </tr> #}
+    {#            {% else %} #}
+    {#                <tr> #}
+    {#                    <td colspan="7" class="text-center py-6 text-muted-foreground"> #}
+    {#                        No festivals found. #}
+    {#                    </td> #}
+    {#                </tr> #}
+    {#            {% endfor %} #}
+    {#            </tbody> #}
+    {#        </table> #}
+    {#    </div> #}
+
+    <div {{ react_component('Footer') }}></div>
+
 {% endblock %}

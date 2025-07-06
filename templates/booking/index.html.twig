@@ -29,6 +29,7 @@
                         <th class="py-3 px-4">Festival</th>
                         {#                        <th class="py-3 px-4">End Date</th> #}
                         {#                        <th class="py-3 px-4">Bands</th> #}
+                        <th class="py-3 px-4">Payment Status</th>
                         <th class="py-3 px-4">Actions</th>
                     </tr>
                     </thead>
@@ -38,18 +39,19 @@
                             <td class="py-3 px-4">{{ booking.id }}</td>
                             <td class="py-3 px-4">{{ booking.fullName }}</td>
                             <td class="py-3 px-4">{{ booking.email }}</td>
-                            <td class="py-3 px-4">{{ booking.festival.name }}</td>
-                            {#                            <td class="py-3 px-4">{{ booking.endDate|date('Y-m-d') }}</td> #}
-                            {#                            <td class="py-3 px-4"> #}
-                            {#                                {% if booking.bands|length > 0 %} #}
-                            {#                                    {{ booking.bands|length }} band{{ booking.bands|length > 1 ? 's' }} #}
-                            {#                                {% else %} #}
-                            {#                                    <span class="text-muted-foreground">None</span> #}
-                            {#                                {% endif %} #}
-                            {#                            </td> #}
+                            {% if booking.festival %}
+                                <td class="py-3 px-4">{{ booking.festival.name }}</td>
+                            {% else %}
+                                <td class="py-3 px-4 text-accent-content">#deleted</td>
+                            {% endif %}
+                            {% if booking.paid %}
+                                <td class="py-3 px-4">Received</td>
+                            {% else %}
+                                <td class="py-3 px-4">Pending</td>
+                            {% endif %}
+
                             <td class="py-3 px-4 space-x-2">
                                 <a class="btn btn-ghost btn-sm"
-                                    {#                                   href="{{ path('app_booking_show', {'id': booking.id}) }}">Show</a> #}
                                     {#                                   href="{{ path('app_booking_show', { 'id': booking.id }) }}" #}
                                 >
                                     Show

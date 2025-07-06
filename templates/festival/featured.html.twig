@@ -1,0 +1,73 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Book {{ festival.name }}{% endblock %}
+
+{% block body %}
+    <div class="flex flex-col min-h-screen bg-background text-foreground">
+
+        <!-- Sticky navbar -->
+        <div class="w-full sticky top-0 z-50 shadow-sm bg-background" {{ react_component('Navbar') }}></div>
+
+        <!-- Booking Hero Section -->
+        <main class="flex flex-col">
+            <section class="relative grid grid-cols-1 md:grid-cols-2 h-screen overflow-hidden px-6 md:px-28">
+
+                <!-- Manual background image via <img> -->
+                <video
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                    class="absolute top-0 left-0 w-full h-full object-cover z-0 scale-125"
+                >
+                    <source src="/videos/auth-background.webm" type="video/webm"/>
+                    Your browser does not support the video tag.
+                </video>
+
+                <!-- Overlay for readability -->
+                <div class="absolute inset-0 bg-black/70 z-0"></div>
+
+                <!-- Left: Booking content -->
+                <div class="relative z-10 flex flex-col justify-center px-6 md:px-20 space-y-6 bg-black">
+                    <div class="space-y-4 px-6">
+                        <h1 class="text-4xl md:text-5xl font-bold leading-tight tracking-tight text-white">
+                            Book your<br><span class="text-accent">festival experience</span>
+                        </h1>
+                        <p class="text-white/80 text-lg max-w-md">
+                            Reserve your spot at <strong>{{ festival.name }}</strong> in {{ festival.location }}.
+                            Complete the form to confirm your booking.
+                        </p>
+                    </div>
+
+                    <!-- Booking form -->
+                    <div class="bg-transparent p-6 mt-6">
+                        {{ include('booking/_form.html.twig', { form: form }) }}
+                    </div>
+                </div>
+
+                <!-- Right: Festival Poster -->
+                <div class="relative z-10 hidden md:flex items-center justify-center">
+                    <div class="relative rounded-xl bg-muted">
+                        <div {{ react_component('LiveBookingCard', {
+                            festival: {
+                                name: festival.name,
+                                location: festival.location,
+                                startDate: festival.startDate|date('Y-m-d'),
+                                endDate: festival.endDate|date('Y-m-d'),
+                                bookingPrice: festival.bookingPrice
+                            }
+                        }) }}></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Featured Festivals below the fold -->
+            <div {{ react_component('FeaturedFestivals', {
+                festivals: festivals
+            }) }}></div>
+        </main>
+
+        <!-- Footer -->
+        <div {{ react_component('Footer') }}></div>
+    </div>
+{% endblock %}

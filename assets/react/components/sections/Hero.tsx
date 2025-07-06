@@ -2,28 +2,38 @@ import {Button} from "@/components/ui/button";
 
 export function Hero() {
     return (
-        <section className="w-full py-20 px-6 md:px-12 bg-muted rounded-xl">
-            <div className="mx-auto max-w-7xl grid grid-cols-1 md:grid-cols-2 items-center gap-12">
+        <section className="w-full relative py-20 px-6 md:px-12 bg-muted rounded-xl overflow-hidden">
+            {/* Background Video */}
+            <video
+                autoPlay
+                muted
+                loop
+                playsInline
+                className="absolute top-0 left-0 w-full h-full object-cover z-0 scale-125"
+            >
+                <source src="/videos/auth-background.webm" type="video/webm"/>
+                Your browser does not support the video tag.
+            </video>
+
+            {/* Overlay to darken the video slightly for better contrast */}
+            <div className="absolute inset-0 bg-black/40 z-0"></div>
+
+            {/* Foreground Content */}
+            <div className="relative z-10 mx-auto max-w-7xl grid grid-cols-1 md:grid-cols-2 items-center gap-12">
                 {/* Left: Text Content */}
-                <div className="space-y-6">
-                    <p className="text-sm font-medium text-foreground/80">Show Time</p>
-                    <h1 className="text-4xl sm:text-5xl font-bold tracking-tight text-foreground">
+                <div className="space-y-6 text-white">
+                    <p className="text-sm font-medium">Show Time</p>
+                    <h1 className="text-4xl sm:text-5xl font-bold tracking-tight">
                         Join the experience
                     </h1>
-                    <p className="text-muted-foreground text-lg leading-relaxed">
+                    <p className="text-lg leading-relaxed text-white/90">
                         Lorem ipsum dolor sit amet consectetur adipisicing elit. Elig
                         doloremque mollitia fugiat omnis! Porro facilis quo animi
                         consequatur. Explicabo.
                     </p>
-                    <Button className="mt-2">
+                    <Button className="mt-2 bg-white text-black hover:bg-gray-200">
                         <span className="mr-1">→</span> Buy Tickets
                     </Button>
-
-                    {/*<img*/}
-                    {/*    src="/images/festival-1.jpg"*/}
-                    {/*    alt="Gallery 1"*/}
-                    {/*    className="h-28 w-full object-cover rounded-lg"*/}
-                    {/*/>*/}
                 </div>
 
                 {/* Right: Gallery Images */}

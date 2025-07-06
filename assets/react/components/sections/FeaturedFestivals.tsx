@@ -1,33 +1,19 @@
-import { Calendar, MapPin } from "lucide-react";
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
+import {Calendar, MapPin} from "lucide-react";
+import {Card, CardContent, CardHeader} from "@/components/ui/card";
 
-// Sample data (replace with dynamic content later)
-const festivals = [
-    {
-        name: "Sunset Vibes Festival",
-        date: "August 10–12, 2025",
-        location: "Barcelona, Spain",
-        image: "/images/festival-1.jpg",
-        genre: "Electronic",
-    },
-    {
-        name: "Aurora Beats",
-        date: "September 2–4, 2025",
-        location: "Reykjavik, Iceland",
-        image: "/images/festival-2.jpg",
-        genre: "Techno",
-    },
-    {
-        name: "Wild Bloom",
-        date: "July 14–16, 2025",
-        location: "Portland, USA",
-        image: "/images/festival-3.jpg",
-        genre: "Indie Rock",
-    },
-];
+export interface Festival {
+    id: number;
+    name: string;
+    location: string;
+    startDate: string;
+    endDate: string;
+}
 
-export function FeaturedFestivals() {
+interface FeaturedFestivalsProps {
+    festivals: Festival[];
+}
+
+export function FeaturedFestivals({festivals}: FeaturedFestivalsProps) {
     return (
         <section className="w-full py-16 bg-muted/50">
             <div className="container px-4 mx-auto space-y-12">
@@ -37,25 +23,20 @@ export function FeaturedFestivals() {
                         A curated selection of standout upcoming events.
                     </p>
                 </div>
-                <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-                    {festivals.map((festival, index) => (
-                        <Card key={index} className="overflow-hidden rounded-xl bg-background shadow-sm transition hover:shadow-md">
-                            <img
-                                src={festival.image}
-                                alt={festival.name}
-                                className="h-48 w-full object-cover"
-                            />
+                <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+                    {festivals.map((festival) => (
+                        <Card key={festival.id}
+                              className="overflow-hidden py-4 rounded-xl bg-background shadow-sm transition hover:shadow-md">
                             <CardHeader className="space-y-3">
                                 <div className="flex items-center justify-between">
                                     <h3 className="text-lg font-semibold">{festival.name}</h3>
-                                    <Badge variant="outline" className="text-xs">{festival.genre}</Badge>
                                 </div>
                                 <div className="text-sm text-muted-foreground flex items-center gap-2">
-                                    <Calendar className="h-4 w-4" />
-                                    <span>{festival.date}</span>
+                                    <Calendar className="h-4 w-4"/>
+                                    <span>{festival.startDate} – {festival.endDate}</span>
                                 </div>
                                 <div className="text-sm text-muted-foreground flex items-center gap-2">
-                                    <MapPin className="h-4 w-4" />
+                                    <MapPin className="h-4 w-4"/>
                                     <span>{festival.location}</span>
                                 </div>
                             </CardHeader>

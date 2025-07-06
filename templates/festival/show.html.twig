@@ -8,10 +8,10 @@
         <div {{ react_component('AppSidebar') }}></div>
 
         <!-- Main Content -->
-        <main class="flex-1 p-8 space-y-8">
+        <main class="flex-1 space-y-6">
             <!-- Header -->
-            <div class="flex justify-between items-center">
-                <h1 class="text-3xl font-bold tracking-tight">Festival Details</h1>
+            <div class="sticky top-0 z-10 bg-card px-4 py-4 flex justify-between items-center shadow-lg">
+                <h1 class="text-3xl font-bold tracking-tight">Details about {{ festival.name }}</h1>
                 <a href="{{ path('app_festival_index') }}" class="btn btn-ghost btn-sm">
                     ← Back to list
                 </a>

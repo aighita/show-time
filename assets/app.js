@@ -11,6 +11,6 @@ registerReactControllerComponents(
 document.addEventListener('DOMContentLoaded', () => {
     const loader = document.querySelector('.loader-wrapper');
     if (loader) {
-        setTimeout(() => loader.remove(), 500);
+        setTimeout(() => loader.remove(), 200);
     }
 });

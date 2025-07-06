@@ -15,14 +15,13 @@ class FestivalType extends AbstractType
         $builder
             ->add('name')
             ->add('location')
-            ->add('startDate', DateType::class)
-            ->add('endDate', DateType::class);
-//            ->add('bands', CollectionType::class, [
-//                'entry_type' => BandType::class,
-//                'entry_options' => ['label' => true],
-//                'allow_add' => true,
-//                'allow_delete' => true,
-//            ]);
+            ->add('startDate', DateType::class, [
+                'widget' => 'single_text',
+            ])
+            ->add('endDate', DateType::class, [
+                'widget' => 'single_text',
+            ])
+            ->add('bookingPrice');
     }
 
     public function configureOptions(OptionsResolver $resolver): void

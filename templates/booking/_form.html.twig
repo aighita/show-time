@@ -1,0 +1,49 @@
+{{ form_start(form, { attr: { class: 'space-y-6', 'data-turbo': 'false' } }) }}
+{# Personal note: data-turbo: false ensures the Turbo Pack / Stimulus wont hijack the session. CORS headers won't fail upon Stripe redirect. #}
+
+{% if form_errors(form) %}
+    <div class="p-4 bg-destructive/10 text-destructive text-sm rounded-lg">
+        {{ form_errors(form) }}
+    </div>
+{% endif %}
+
+{# Email Field #}
+<div>
+    {{ form_label(form.email, null, {
+        label_attr: { class: 'block text-sm font-medium text-foreground mb-1 text-white' }
+    }) }}
+    {{ form_widget(form.email, {
+        attr: {
+            class: 'input input-bordered text-white w-full bg-background text-foreground placeholder:text-muted-foreground border shadow-md bg-transparent'
+        }
+    }) }}
+    {% if form_errors(form.email) %}
+        <p class="mt-1 text-sm text-destructive">{{ form_errors(form.email) }}</p>
+    {% endif %}
+</div>
+
+{# Full Name Field #}
+<div>
+    {{ form_label(form.fullName, null, {
+        label_attr: { class: 'block text-sm font-medium text-foreground mb-1 text-white' }
+    }) }}
+    {{ form_widget(form.fullName, {
+        attr: {
+            class: 'input input-bordered text-white w-full bg-background text-foreground placeholder:text-muted-foreground border shadow-md bg-transparent'
+        }
+    }) }}
+    {% if form_errors(form.fullName) %}
+        <p class="mt-1 text-sm text-destructive">{{ form_errors(form.fullName) }}</p>
+    {% endif %}
+</div>
+
+{# Submit Button #}
+<div class="flex flex-col md:flex-row gap-4 pt-6">
+    <button
+        type="submit"
+        class="btn text-white transition {{ (showDelete is defined and showDelete) ? 'w-full md:w-1/2' : 'w-full' }} btn-success shadow-md">
+        Book
+    </button>
+</div>
+
+{{ form_end(form) }}

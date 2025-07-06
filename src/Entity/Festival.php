@@ -38,8 +38,11 @@ class Festival
     /**
      * @var Collection<int, Booking>
      */
-    #[ORM\OneToMany(targetEntity: Booking::class, mappedBy: 'festival')]
+    #[ORM\OneToMany(targetEntity: Booking::class, mappedBy: 'festival', cascade: ['persist'], orphanRemoval: false)]
     private Collection $bookings;
+
+    #[ORM\Column(length: 255)]
+    private ?string $bookingPrice = null;
 
     public function __construct()
     {
@@ -153,6 +156,18 @@ class Festival
                 $booking->setFestival(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getBookingPrice(): ?string
+    {
+        return $this->bookingPrice;
+    }
+
+    public function setBookingPrice(string $bookingPrice): static
+    {
+        $this->bookingPrice = $bookingPrice;
 
         return $this;
     }
