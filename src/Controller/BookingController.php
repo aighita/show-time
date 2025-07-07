@@ -75,8 +75,13 @@ final class BookingController extends AbstractController
     }
 
     #[Route('/booking/success/{id}', name: 'app_payment_success', methods: ['GET'])]
-    public function success(Request $request, Booking $booking): Response
+    public function success(Request $request, Booking $booking, EntityManagerInterface $em): Response
     {
+        if (!$booking->isPaid()) {
+            $booking->setPaid(true);
+            $em->flush();
+        }
+
         $this->addFlash('success', 'Payment successful! Your booking is confirmed.');
 
         return $this->render('booking/success.html.twig', [

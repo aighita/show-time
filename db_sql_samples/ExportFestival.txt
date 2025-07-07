@@ -1,0 +1,3 @@
+mysql -u your_user -p your_database -e "SELECT * FROM festival INTO OUTFILE './festival_export.csv'
+FIELDS TERMINATED BY ',' ENCLOSED BY '\"'
+LINES TERMINATED BY '\n';"

@@ -1,5 +1,3 @@
-// 'use client';
-
 import {useEffect, useState} from 'react';
 import {Card, CardContent, CardHeader} from '@/components/ui/card';
 import {Label} from '@/components/ui/label';
@@ -44,7 +42,7 @@ export default function LiveBookingCard({festival}: Props) {
                 <Card className="bg-card text-card-foreground rounded-2xl shadow-2xl border overflow-hidden">
                     <CardHeader className="p-0">
                         <img
-                            src="/images/show-time-poster.png"
+                            src="/images/ticket.png"
                             alt="Show Time Poster"
                             className="w-full h-[220px] object-cover"
                         />
@@ -89,7 +87,6 @@ export default function LiveBookingCard({festival}: Props) {
                             <div>
                                 <Label className="text-sm text-muted-foreground">Price</Label>
                                 <p className="text-lg font-medium">{festival.bookingPrice} EUR</p>
-                                {/*<p className="text-sm text-muted-foreground">{festival.location}</p>*/}
                             </div>
 
                             <Accordion type="single" collapsible>
