@@ -1,11 +1,11 @@
-import React from "react";
+// import React from "react";
 import {Card, CardContent, CardDescription, CardHeader, CardTitle,} from "@/components/ui/card";
 import {Tabs, TabsContent, TabsList, TabsTrigger,} from "@/components/ui/tabs";
 import {Bar, BarChart, ResponsiveContainer, Tooltip, XAxis, YAxis,} from "recharts";
 import {Separator} from "@/components/ui/separator";
 import {ScrollArea} from "@/components/ui/scroll-area";
 
-const revenueData = [
+const revenueDataPlaceholder: revenueDataModel[] = [
     {month: "Jan", revenue: 12000},
     {month: "Feb", revenue: 15000},
     {month: "Mar", revenue: 18000},
@@ -14,18 +14,33 @@ const revenueData = [
     {month: "Jun", revenue: 17000},
 ];
 
-const userData = [
+const userDataPlaceholder: userDataModel[] = [
     {label: "Visitors", value: 920},
     {label: "New Users", value: 230},
     {label: "Bookings", value: 150},
     {label: "Cancellations", value: 12},
 ];
 
-export default function DashboardAnalytics() {
+interface revenueDataModel {
+    month: string;
+    revenue: number;
+}
+
+interface userDataModel {
+    label: string;
+    value: number;
+}
+
+interface DashboardAnalyticsProps {
+    revenueData: revenueDataModel;
+    userData: userDataModel;
+}
+
+export default function DashboardAnalytics({revenueData, userData}: DashboardAnalyticsProps) {
     return (
         <div className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-                {userData.map((stat) => (
+                {userDataPlaceholder.map((stat) => (
                     <Card key={stat.label} className="bg-card shadow-md">
                         <CardHeader>
                             <CardDescription>{stat.label}</CardDescription>
@@ -51,7 +66,7 @@ export default function DashboardAnalytics() {
                         </CardHeader>
                         <CardContent className="h-[300px]">
                             <ResponsiveContainer width="100%" height="100%">
-                                <BarChart data={revenueData}>
+                                <BarChart data={revenueDataPlaceholder}>
                                     <XAxis dataKey="month" stroke="#888888" fontSize={12}/>
                                     <YAxis stroke="#888888" fontSize={12}/>
                                     <Tooltip/>

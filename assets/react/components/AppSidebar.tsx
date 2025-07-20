@@ -17,9 +17,9 @@ import {Avatar, AvatarFallback, AvatarImage} from "@/components/ui/avatar";
 
 export default function AppSidebar() {
     const items = [
-        {title: "Bands", url: "/band", icon: Music},
-        {title: "Festivals", url: "/festival", icon: PartyPopper},
-        {title: "Bookings", url: "/booking", icon: ClipboardList}
+        {title: "Bands", url: "/admin/bands", icon: Music},
+        {title: "Festivals", url: "/admin/festivals", icon: PartyPopper},
+        {title: "Bookings", url: "/admin/bookings", icon: ClipboardList}
     ];
 
     return (
@@ -36,7 +36,7 @@ export default function AppSidebar() {
                     <div className="flex items-center justify-between">
                         {/* Dashboard link */}
                         <a
-                            href="/dashboard"
+                            href="/admin/dashboard"
                             className="flex items-center gap-2 text-sm font-medium hover:text-foreground transition-colors"
                         >
                             <h1 className="text-lg font-bold text-foreground">Dashboard</h1>
@@ -44,7 +44,7 @@ export default function AppSidebar() {
 
                         {/* Avatar profile link */}
                         <a
-                            href="/profile"
+                            href="/admin/profile"
                             className="flex items-center gap-2 text-sm font-medium hover:text-foreground transition-colors"
                         >
                             <Avatar className="w-8 h-8">
@@ -86,11 +86,11 @@ export default function AppSidebar() {
                         <SidebarMenuItem>
                             <SidebarMenuButton asChild>
                                 <a
-                                    href="/account"
+                                    href="/logout"
                                     className="flex items-center gap-2 text-sm font-medium hover:text-foreground transition-colors"
                                 >
                                     <User className="w-4 h-4"/>
-                                    <span>Account</span>
+                                    <span>Log Out</span>
                                 </a>
                             </SidebarMenuButton>
                         </SidebarMenuItem>

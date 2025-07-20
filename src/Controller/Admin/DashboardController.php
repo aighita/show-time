@@ -9,10 +9,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
-#[Route('/dashboard')]
+#[Route('/admin')]
 final class DashboardController extends AbstractController
 {
-    #[Route('/', name: 'app_dashboard')]
+    #[Route('/dashboard', name: 'app_dashboard')]
     public function index(
         BandRepository     $bandRepo,
         FestivalRepository $festivalRepo,
@@ -28,10 +28,25 @@ final class DashboardController extends AbstractController
         $upcomingFestivals = 0;
         $bookingsThisMonth = 0;
 
-        // Fallbacks or real data
-        $festivalList = []; // You can later fetch with $festivalRepo->findAll() or custom
-        $bandList = [];     // You can use $bandRepo->findAll()
-        $bookingList = [];  // You can use $bookingRepo->findAll()
+        $festivalList = [];
+        $bandList = [];
+        $bookingList = [];
+
+        $revenuePerMonth = [];
+        
+        for ($i = 1; $i < 7; $i++) {
+            $from = new \DateTime('-' . $i . 'month');
+            $to = new \DateTime('-' . ($i - 1) . 'month');
+
+            $qb = $bookingRepo->createQueryBuilder('b');
+            $qb
+                ->andWhere('b.createdAt BETWEEN :from AND :to')
+                ->setParameter('from', $from)
+                ->setParameter('to', $to);
+            $result = $qb->getQuery()->getResult();
+
+            $revenuePerMonth[$from->format('Y-m')] = $result;
+        }
 
         return $this->render('dashboard/index.html.twig', [
             'summary' => [
@@ -42,6 +57,10 @@ final class DashboardController extends AbstractController
             'festivals' => $festivalList,
             'bands' => $bandList,
             'bookings' => $bookingList,
+            'analytics' => [
+                'revenueData' => $revenuePerMonth,
+                'userData' => []
+            ]
         ]);
     }
 }

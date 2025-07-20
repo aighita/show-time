@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use App\Entity\Booking;
-use App\Repository\BookingRepository;
 use App\Service\StripeService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -14,15 +13,6 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 final class BookingController extends AbstractController
 {
-    #[Route('/booking', name: 'app_booking')]
-    public function index(BookingRepository $bookingsRepository): Response
-    {
-        return $this->render('booking/index.html.twig', [
-            'controller_name' => 'BookingController',
-            'bookings' => $bookingsRepository->findAll(),
-        ]);
-    }
-
     #[Route('/booking/pay/{id}', name: 'app_booking_pay')]
     public function pay(Booking $booking, StripeService $stripe, EntityManagerInterface $em): Response
     {

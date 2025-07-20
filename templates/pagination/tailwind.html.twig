@@ -1,0 +1,70 @@
+{% if pageCount > 1 %}
+    <nav class="flex justify-center items-center space-x-2 mt-6" aria-label="Pagination">
+        <ul class="inline-flex items-center -space-x-px rounded-md shadow-sm overflow-hidden">
+            {% if current > 1 %}
+                <li>
+                    <a href="{{ path(route, knp_pagination_query(query, 1, options)) }}"
+                       class="px-3 py-2 text-sm border border-gray-300 bg-white text-gray-700 hover:bg-gray-100">
+                        First
+                    </a>
+                </li>
+            {% endif %}
+
+            {% if previous is defined %}
+                <li>
+                    <a href="{{ path(route, knp_pagination_query(query, previous, options)) }}"
+                       class="px-3 py-2 text-sm border border-gray-300 bg-white text-gray-700 hover:bg-gray-100">
+                        &larr; Previous
+                    </a>
+                </li>
+            {% else %}
+                <li>
+                <span class="px-3 py-2 text-sm border border-gray-300 bg-gray-100 text-gray-400 cursor-not-allowed">
+                    &larr; Previous
+                </span>
+                </li>
+            {% endif %}
+
+            {% for page in pagesInRange %}
+                {% if page == current %}
+                    <li>
+                    <span class="px-3 py-2 text-sm font-semibold text-white bg-indigo-600 border border-indigo-600">
+                        {{ page }}
+                    </span>
+                    </li>
+                {% else %}
+                    <li>
+                        <a href="{{ path(route, knp_pagination_query(query, page, options)) }}"
+                           class="px-3 py-2 text-sm border border-gray-300 bg-white text-gray-700 hover:bg-gray-100">
+                            {{ page }}
+                        </a>
+                    </li>
+                {% endif %}
+            {% endfor %}
+
+            {% if next is defined %}
+                <li>
+                    <a href="{{ path(route, knp_pagination_query(query, next, options)) }}"
+                       class="px-3 py-2 text-sm border border-gray-300 bg-white text-gray-700 hover:bg-gray-100">
+                        Next &rarr;
+                    </a>
+                </li>
+            {% else %}
+                <li>
+                <span class="px-3 py-2 text-sm border border-gray-300 bg-gray-100 text-gray-400 cursor-not-allowed">
+                    Next &rarr;
+                </span>
+                </li>
+            {% endif %}
+
+            {% if current < pageCount %}
+                <li>
+                    <a href="{{ path(route, knp_pagination_query(query, pageCount, options)) }}"
+                       class="px-3 py-2 text-sm border border-gray-300 bg-white text-gray-700 hover:bg-gray-100">
+                        Last
+                    </a>
+                </li>
+            {% endif %}
+        </ul>
+    </nav>
+{% endif %}

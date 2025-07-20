@@ -18,19 +18,19 @@ export default function DashboardHero({
             key: "festivals",
             title: "Festivals",
             value: festivals,
-            href: "/festival",
+            href: "/admin/festivals",
         },
         {
             key: "bands",
             title: "Bands",
             value: bands,
-            href: "/band",
+            href: "/admin/bands",
         },
         {
             key: "bookings",
             title: "Bookings",
             value: bookings,
-            href: "/booking",
+            href: "/admin/bookings",
         },
     ];
 

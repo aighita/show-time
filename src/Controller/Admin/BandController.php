@@ -6,20 +6,41 @@ use App\Entity\Band;
 use App\Form\BandType;
 use App\Repository\BandRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
-#[Route('/band')]
+#[Route('/admin/bands')]
 final class BandController extends AbstractController
 {
     #[Route('/', name: 'app_band_index', methods: ['GET'])]
-    public function index(BandRepository $bandRepository): Response
+    public function index(Request $request, BandRepository $bandsRepository, EntityManagerInterface $em, PaginatorInterface $paginator): Response
     {
+        $search = $request->query->get('search');
+
+        $qb = $bandsRepository->createQueryBuilder('b');
+
+        if ($search) {
+            $qb->andWhere('LOWER(b.fullName) LIKE :search')
+                ->setParameter('search', '%' . strtolower($search) . '%');
+        }
+
+        $bandsQuery = $qb->getQuery();
+
+        $bands = $paginator->paginate(
+            $bandsQuery,
+            $request->query->getInt('page', 1),
+            25
+        );
+
+        $bands->setTemplate('pagination/tailwind.html.twig');
+
         return $this->render('band/index.html.twig', [
             'controller_name' => 'BandController',
-            'bands' => $bandRepository->findAll(),
+            'bands' => $bands,
+            'search' => $search,
         ]);
     }
 

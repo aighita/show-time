@@ -7,6 +7,7 @@ use App\Repository\FestivalRepository;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Bundle\FixturesBundle\FixtureGroupInterface;
 use Doctrine\Persistence\ObjectManager;
+use Faker\Factory;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
 class BookingFixtures extends Fixture implements FixtureGroupInterface
@@ -54,10 +55,13 @@ class BookingFixtures extends Fixture implements FixtureGroupInterface
             $booking->setEmail($email);
             $booking->setPaid((bool)random_int(0, 1));
 
-// Always assign a valid festival entity
+            // Always assign a valid festival entity
             $festival = $festivals[array_rand($festivals)];
             $booking->setFestival($festival);
 
+//            $createdAtDateTime = new \DateTime(this);
+            $faker = Factory::create();
+            $booking->setCreatedAt($faker->dateTimeBetween($startDate = '-6 months', $endDate = '-2 days'));
             $manager->persist($booking);
         }
 

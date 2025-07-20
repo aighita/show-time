@@ -36,6 +36,9 @@ class Booking
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $stripeSessionId = null;
 
+    #[ORM\Column]
+    private ?\DateTime $createdAt = null;
+
     public function getStripeSessionUrl(): ?string
     {
         return $this->stripeSessionUrl;
@@ -106,6 +109,18 @@ class Booking
     public function setFullName(string $fullName): static
     {
         $this->fullName = $fullName;
+
+        return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTime
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(\DateTime $createdAt): static
+    {
+        $this->createdAt = $createdAt;
 
         return $this;
     }

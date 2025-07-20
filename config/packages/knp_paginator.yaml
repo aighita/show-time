@@ -1,0 +1,10 @@
+knp_paginator:
+    page_range: 5
+    default_options:
+        page_name: page
+        sort_field_name: id
+        sort_direction_name: asc
+        distinct: false
+    template:
+        pagination: 'pagination/tailwind.html.twig'
+        sortable: '@KnpPaginator/Pagination/sortable_link.html.twig'

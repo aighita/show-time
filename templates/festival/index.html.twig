@@ -1,33 +1,43 @@
-{# templates/festival/index.html.twig #}
 {% extends 'base.html.twig' %}
 
 {% block title %}Festival Admin{% endblock %}
 
 {% block body %}
     <div class="flex min-h-screen bg-background text-foreground">
-        <!-- React Sidebar Component -->
+        <!-- Sidebar -->
         <div {{ react_component('AppSidebar') }}></div>
 
-        <!-- Main Content Area -->
+        <!-- Main -->
         <main class="flex-1 space-y-6">
             <!-- Header -->
-            <div class="sticky top-0 z-10 bg-card px-4 py-4 flex justify-between items-center shadow-lg">
+            <div
+                class="sticky top-0 z-10 bg-card px-6 py-4 flex flex-col md:flex-row justify-between items-center gap-4 shadow-md">
                 <h1 class="text-3xl font-bold tracking-tight">Festivals</h1>
-                <a class="btn btn-ghost btn-sm" href="{{ path('app_festival_new') }}">
+                <a class="btn btn-primary btn-sm" href="{{ path('app_festival_new') }}">
                     + Add Festival
                 </a>
             </div>
 
-            <!-- Table of Festivals -->
-            <div class="overflow-x-auto rounded-xl px-4 bg-card text-card-foreground">
+            <!-- Search + Pagination -->
+            <div class="px-6 flex flex-col md:flex-row md:items-center justify-between gap-4">
+                <form method="get" class="flex items-center gap-2">
+                    <input type="text" name="search" value="{{ search }}" placeholder="Search by name"
+                           class="input input-bordered input-sm w-60 text-sm border-gray-300 bg-white"/>
+                    <button type="submit" class="btn btn-sm btn-primary">Search</button>
+                </form>
+                {{ knp_pagination_render(festivals, 'pagination/tailwind.html.twig') }}
+            </div>
+
+            <!-- Table -->
+            <div class="overflow-x-auto px-6 pb-6 bg-card text-card-foreground rounded-xl">
                 <table class="table w-full text-sm">
                     <thead class="bg-muted">
                     <tr class="text-left text-xs uppercase tracking-wider text-muted-foreground">
                         <th class="py-3 px-4">ID</th>
                         <th class="py-3 px-4">Name</th>
                         <th class="py-3 px-4">Location</th>
-                        <th class="py-3 px-4">Start Date</th>
-                        <th class="py-3 px-4">End Date</th>
+                        <th class="py-3 px-4">Start</th>
+                        <th class="py-3 px-4">End</th>
                         <th class="py-3 px-4">Bands</th>
                         <th class="py-3 px-4">Price</th>
                         <th class="py-3 px-4">Actions</th>
@@ -37,11 +47,10 @@
                     {% for festival in festivals %}
                         <tr class="hover:bg-muted/50 transition-colors">
                             <td class="py-3 px-4">{{ festival.id }}</td>
-                            <td class="py-3 px-4">{{ festival.name }}</td>
+                            <td class="py-3 px-4 font-medium">{{ festival.name }}</td>
                             <td class="py-3 px-4">{{ festival.location }}</td>
                             <td class="py-3 px-4">{{ festival.startDate|date('Y-m-d') }}</td>
                             <td class="py-3 px-4">{{ festival.endDate|date('Y-m-d') }}</td>
-
                             <td class="py-3 px-4">
                                 {% if festival.bands|length > 0 %}
                                     {{ festival.bands|length }} band{{ festival.bands|length > 1 ? 's' }}
@@ -52,21 +61,18 @@
                             <td class="py-3 px-4">{{ festival.bookingPrice }}</td>
                             <td class="py-3 px-4 space-x-2">
                                 <a class="btn btn-ghost btn-sm"
-                                    {#                                   href="{{ path('app_festival_show', {'id': festival.id}) }}">Show</a> #}
-                                   href="{{ path('app_festival_show', { 'id': festival.id }) }}"
-                                >
+                                   href="{{ path('app_festival_show', { 'id': festival.id }) }}">
                                     Show
                                 </a>
                                 <a class="btn btn-soft btn-sm"
-                                   href="{{ path('app_festival_edit', { 'id': festival.id }) }}"
-                                >
+                                   href="{{ path('app_festival_edit', { 'id': festival.id }) }}">
                                     Edit
                                 </a>
                             </td>
                         </tr>
                     {% else %}
                         <tr>
-                            <td colspan="7" class="text-center py-6 text-muted-foreground">
+                            <td colspan="8" class="text-center py-6 text-muted-foreground">
                                 No festivals found.
                             </td>
                         </tr>
