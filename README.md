@@ -10,6 +10,9 @@
 
 </div>
 
+[![Show Time – Preview](preview-dashboard.jpeg)](https://www.youtube.com/watch?v=9ugiF_C-cUI "Show Time – Music Festival Management Platform Preview")
+
+
 ## 🌟 Project Overview
 
 **Show Time** is a full-stack music festival management platform I developed during my participation in the NetRom Summer Camp 2025 in Craiova. This project demonstrates my ability to build complex web applications using modern technologies and showcases my growth as a developer through hands-on learning.
@@ -21,6 +24,12 @@ A comprehensive platform that allows users to:
 - **Book** festival tickets with secure payment processing
 - **Manage** festivals, bands, and bookings through an admin dashboard
 - **Experience** a modern, responsive UI built with React and TypeScript
+
+### 📹 Project Demo
+
+![Project Demo](./preview.mp4)
+
+*Full application walkthrough showing festival browsing, booking flow, and payment integration*
 
 ## 🚀 Key Achievements & Learning Outcomes
 
