@@ -34,12 +34,6 @@ A comprehensive platform that allows users to:
 - **Manage** festivals, bands, and bookings through an admin dashboard
 - **Experience** a modern, responsive UI built with React and TypeScript
 
-### 📹 Project Demo
-
-![Project Demo](./preview.mp4)
-
-*Full application walkthrough showing festival browsing, booking flow, and payment integration*
-
 ## 🚀 Key Achievements & Learning Outcomes
 
 ### 💻 Full-Stack Development Mastery
